@@ -6,37 +6,6 @@ def lowerdash(t):
 	return '-'.join([ w.lower() for w in re.findall('[a-z]+|[A-Z]+[a-z]*', t) ])
 endglobal
 
-# Normal javascript snippets
-#
-snippet imp "Import a lib" b
-import $1 from '$2`!p snip.rv=lowerdash(t[1])`';
-endsnippet
-
-snippet impf "Import a file" b
-import $1 from '${2:./}${3:$1}';
-endsnippet
-
-snippet impn "Import nested" b
-import { $1 } from '$2';
-endsnippet
-
-snippet impp "Import without from" b
-import '$1';
-endsnippet
-
-snippet imps "Import pluralized" b
-import $1 from '${2:.}/$1s';
-endsnippet
-
-snippet rc "Require const" b
-const $1 = require('`!p snip.rv=lowerdash(t[1])`');
-endsnippet
-
-snippet imm "Import immutable List and Map" b
-import { List, Map } from 'immutable';
-endsnippet
-
-
 snippet icn "Import classnames" b
 import classnames from 'classnames';
 endsnippet
@@ -59,30 +28,6 @@ snippet clv "Console log variable" b
 console.log('$1:', $1);
 endsnippet
 
-snippet exp "Export from location" b
-export $1 from '${2:./}$1';
-endsnippet
-
-snippet expn "Export nested" b
-export { $1 } from '${2:./}';
-endsnippet
-
-snippet expi "Export from a file import" b
-import $1 from '${2:./}${3:$1}';
-export ${4:default} $1;
-endsnippet
-
-snippet expix "Export from a jsx file import" b
-import $1 from '${2:./}${3:$1}.jsx';
-export ${4:default} $1;
-endsnippet
-
-snippet expf "Export function" b
-export ${1:default }function($2) {
-	$3
-}
-endsnippet
-
 # ==========================================
 # React Snippets
 #
@@ -91,15 +36,7 @@ import React, { Component, PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 export default class ${1:`!v expand('%:t:r')`} extends Component {
-	constructor(props) {
-		super(props);
-
-		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-	}
-
 	static propTypes = {
-		className: PropTypes.string,
-		children: PropTypes.node,
 	};
 
 	render() {
@@ -110,62 +47,19 @@ export default class ${1:`!v expand('%:t:r')`} extends Component {
 }
 endsnippet
 
-snippet r.cce "React.createClass export" b
-import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
-
-const ${1:`!v expand('%:t:r')`} = React.createClass({
-	mixins: [PureRenderMixin],
-
-	render() {
-		return (
-			${2:<div />}
-		);
-	}
-});
-
-$1.propTypes = {
-	className: PropTypes.string,
-};
-
-export default $1;
-endsnippet
-
-
-snippet rfe "React function exported" b
-import React from 'react';
-
-export default function `!v expand('%:t:r')`($2) {
-	return (
-		${3:<div>
-		</div>}
-	);
-}
-endsnippet
-
 snippet rpe "React pure export" b
 import React, { PropTypes } from 'react';
 
-const `!v expand('%:t:r')` = (${1:props}) => {
-	return (
-		<div${2}>
-		</div>
-	);
-};
+const `!v expand('%:t:r')` = (${1:props}) => (
+	<div${2}>
+	</div>
+);
 
 `!v expand('%:t:r')`.propTypes = {
 	${3}
 };
 
 export default `!v expand('%:t:r')`;
-endsnippet
-
-snippet icss "Import css transition group" b
-import CSSTransitionGroup from 'react-addons-css-transition-group';
-endsnippet
-
-snippet iadd "Import react addon" b
-import $1 from 'react-addons-`!p snip.rv=lowerdash(t[1])`';
 endsnippet
 
 snippet rcf "React class function" b
@@ -175,7 +69,7 @@ $1 = (${2:e}) => {
 endsnippet
 
 
-snippet reactf "React file with a render" b
+snippet rfr "React file with a render" b
 import React from 'react';
 import ReactDOM from 'react-dom';
 
